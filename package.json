@@ -2,10 +2,10 @@
   "name": "test_cbstudio",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon app/server.js"
+  "main": "app/index.js",
+  "scripts": {    
+    "dev" : "nodemon app/server.js",
+    "start" : "node app/index.js"
   },
   "repository": {
     "type": "git",
