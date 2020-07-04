@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "app/index.js",
-  "scripts": {    
-    "dev" : "nodemon app/server.js",
-    "start" : "node app/index.js"
+  "scripts": {
+    "dev": "nodemon app/server.js",
+    "start": "node app/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,9 @@
     "mongodb": "^3.5.9"
   },
   "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "nodemon": "^2.0.4"
   }
 }
