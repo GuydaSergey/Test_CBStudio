@@ -1,42 +1,40 @@
 const http = require('http');
 const express = require('express');
+const bodyParser = require('body-parser');
 const webServerConfig = require('../config/server.js');
- 
+const log = require('../../helpers/log')(module);
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+require('../routes')(app);
+
 let httpServer;
- 
+
 function initialize() {
   return new Promise((resolve, reject) => {
-    const app = express();
     httpServer = http.createServer(app);
- 
-    app.get('/', (req, res) => {
-      res.end('Hello World!');
-    });
- 
     httpServer.listen(webServerConfig.port)
       .on('listening', () => {
-        console.log(`Web server listening on localhost:${webServerConfig.port}`);
- 
+        log.info(`Web server listening on localhost:${webServerConfig.port}`);
         resolve();
       })
-      .on('error', err => {
+      .on('error', (err) => {
         reject(err);
       });
   });
 }
 
 function close() {
-    return new Promise((resolve, reject) => {
-      httpServer.close((err) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-   
-        resolve();
-      });
+  return new Promise((resolve, reject) => {
+    httpServer.close((err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
     });
-  }
-   
-module.exports.close = close; 
+  });
+}
+
+module.exports.close = close;
 module.exports.initialize = initialize;

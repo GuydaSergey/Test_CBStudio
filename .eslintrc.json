@@ -11,6 +11,7 @@
         "ecmaVersion": 11
     },
     "rules": {
-        "linebreak-style": ["off", "windows"]
+        "linebreak-style": ["off", "windows"],
+        "no-underscore-dangle": ["error", { "allow": ["_instanc"] }]
     }
 }
