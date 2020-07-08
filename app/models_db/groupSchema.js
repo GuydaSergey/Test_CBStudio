@@ -10,5 +10,4 @@ const GroupModel = mongoose.model('Group', Group);
 
 module.exports = {
   GroupModel,
-  Group,
 };

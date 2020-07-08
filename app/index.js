@@ -53,7 +53,7 @@ process.on('SIGINT', () => {
 
 process.on('uncaughtException', (err) => {
   log.info('Uncaught exception');
-  log.error(err);
+  log.error(err.message);
 
   shutdown(err);
 });

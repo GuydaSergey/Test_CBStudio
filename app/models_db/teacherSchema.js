@@ -10,5 +10,4 @@ const TeacherModel = mongoose.model('Teacher', Teacher);
 
 module.exports = {
   TeacherModel,
-  Teacher,
 };
