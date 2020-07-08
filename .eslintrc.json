@@ -12,6 +12,7 @@
     },
     "rules": {
         "linebreak-style": ["off", "windows"],
-        "no-underscore-dangle": ["error", { "allow": ["_instanc"] }]
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+        "no-param-reassign": ["error", { "props": false }]        
     }
 }
