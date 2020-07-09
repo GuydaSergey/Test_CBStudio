@@ -1,3 +1,4 @@
+require('dotenv').config();
 const webServer = require('./services/server.js');
 const log = require('../helpers/log')(module);
 
