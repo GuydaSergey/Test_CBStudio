@@ -1,4 +1,5 @@
 const log = require('../../helpers/log')(module);
+const { isExistOrEmptyString } = require('../../helpers/helper');
 const { GroupModel } = require('../models_db/groupSchema');
 
 module.exports = (app) => {
@@ -55,7 +56,7 @@ module.exports = (app) => {
         return;
       }
 
-      group.name = !req.body.name ? group.name : req.body.name;
+      group.name = isExistOrEmptyString(req.body.name) ? group.name : req.body.name;
 
       await group.save().then(() => {
         log.info('Group update');

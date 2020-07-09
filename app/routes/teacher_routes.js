@@ -1,4 +1,5 @@
 const log = require('../../helpers/log')(module);
+const { isExistOrEmptyString } = require('../../helpers/helper');
 const { TeacherModel } = require('../models_db/teacherSchema');
 
 module.exports = (app) => {
@@ -55,7 +56,7 @@ module.exports = (app) => {
         return;
       }
 
-      teacher.name = !req.body.name ? teacher.name : req.body.name;
+      teacher.name = isExistOrEmptyString(req.body.name) ? teacher.name : req.body.name;
 
       await teacher.save().then(() => {
         log.info('Teacher update');

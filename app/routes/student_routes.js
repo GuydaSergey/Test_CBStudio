@@ -1,4 +1,5 @@
 const log = require('../../helpers/log')(module);
+const { isExistOrEmptyString } = require('../../helpers/helper');
 const { GroupModel } = require('../models_db/groupSchema');
 const { StudentModel } = require('../models_db/studentsSchema');
 
@@ -28,7 +29,7 @@ module.exports = (app) => {
   app.post('/student', async (req, res) => {
     let answer;
     try {
-      if (req.body.group_id.length < 1) req.body.group_id = undefined;
+      if (isExistOrEmptyString(req.body.group_id)) req.body.group_id = undefined;
       const group = await GroupModel.findById(req.body.group_id, (error, doc) => {
         if (error) throw error;
         if (doc) return doc.id;
@@ -37,7 +38,7 @@ module.exports = (app) => {
 
       const student = new StudentModel({
         name: req.body.name,
-        age: req.body.age,
+        age: Number.isInteger(req.body.age) ? req.body.age : null,
         group,
       });
 
@@ -64,16 +65,16 @@ module.exports = (app) => {
         answer = { error: 'Not found' };
         return;
       }
-      if (req.body.group_id.length < 1) req.body.group_id = undefined;
+      if (isExistOrEmptyString(req.body.group_id)) req.body.group_id = undefined;
       const group = await GroupModel.findById(req.body.group_id, (error, doc) => {
         if (error) throw error;
         if (doc) return doc.id;
         return doc;
       });
 
-      student.name = !req.body.name ? student.name : req.body.name;
-      student.age = !req.body.age ? student.age : req.body.age;
-      student.group = !req.body.group_id ? student.group : group;
+      student.name = isExistOrEmptyString(req.body.name) ? student.name : req.body.name;
+      student.age = Number.isInteger(req.body.age) ? req.body.age : student.age;
+      student.group = isExistOrEmptyString(req.body.group_id) ? student.group : group;
 
       await student.save().then(() => {
         log.info('Student update');
